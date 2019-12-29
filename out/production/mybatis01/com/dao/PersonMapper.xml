@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PersonMapper">
+    <resultMap id="personMap" type="person">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <association property="card" javaType="card">
+            <id property="id" column="id"/>
+            <result property="num" column="num"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="personMap">
+         SELECT
+            p.id,
+            p.name,
+            p.sex,
+            c.num
+        FROM
+            person p
+        LEFT JOIN card c ON p.id = c.id
+    </select>
+
+
+
+
+</mapper>
